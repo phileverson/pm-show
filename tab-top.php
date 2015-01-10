@@ -53,7 +53,7 @@ echo '</span>';
             <ul class="right">
                 <li class="divider"></li>
                 <li>
-                    <a href="#" class="nav-legend">Enviorment: </a>
+                    <a href="#" class="nav-legend">Currently Viewing (Enviorment): </a>
                 </li>
                 <li class="has-dropdown not-click">
                     <a href="#" id="currentBranchNav"></a>
