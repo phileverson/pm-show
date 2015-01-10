@@ -1,9 +1,9 @@
 var toolTipHTML = '';
 
-toolTipHTML += '<link href="0-tab/css/phil-tooltip.css" rel="stylesheet" type="text/css">';
-toolTipHTML += '<iframe src="0-tab/tab-top.php" class="iframeLoad-pm-show h-of-0" width="100%" scrolling="no" frameborder="0"></iframe>'
+toolTipHTML += '<link href="pm-show/css/phil-tooltip.css" rel="stylesheet" type="text/css">';
+toolTipHTML += '<iframe src="pm-show/tab-top.php" class="iframeLoad-pm-show h-of-0" width="100%" scrolling="no" frameborder="0"></iframe>'
 toolTipHTML += '<div id="tool-tip-bottom-pm-show"><span class="bottom-logo-pm-show">pmShow</span>'
-toolTipHTML += '<span><img class="bottom-up-arrow-right open-iframe" src="0-tab/img/up-arrow.png"></span>';
+toolTipHTML += '<span><img class="bottom-up-arrow-right open-iframe" src="pm-show/img/up-arrow.png"></span>';
 toolTipHTML += '</div>';
 
 $('body').append(toolTipHTML);
