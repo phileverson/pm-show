@@ -128,12 +128,13 @@ if(currentBranch == 'master')
 
 if(currentBranch.search('task') >= 0)
 {
-    currentBranch = 'Individual Task';
+    $('#currentBranchNav').text('Individual Task');
 }
-
+else 
+{
 // var currentBranch = 'task/001';
 $('#currentBranchNav').text(currentBranch);
-
+}
 
 function updateBranchButtons ()
 {
@@ -141,7 +142,7 @@ function updateBranchButtons ()
     {
         var branchTaskID = currentBranch.substring(5,8);
         console.log(branchTaskID);
-        $('#switch-branch-' + branchTaskID).text('Currently&nbsp;Viewing');
+        $('#switch-branch-' + branchTaskID).html('Currently&nbsp;Viewing');
         $('#switch-branch-' + branchTaskID).addClass('disabled');
     }
 }
