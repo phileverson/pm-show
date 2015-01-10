@@ -1,7 +1,27 @@
 <?php
-$tmp = shell_exec('git rev-parse --abbrev-ref HEAD');
-$output = htmlentities(trim($tmp));
-echo '<span id="currentBranchOutput" style="display:none">' . $output . '</span>';
+// shell_exec('cd ..');
+// $tmp = shell_exec('git rev-parse --abbrev-ref HEAD');
+// $output = htmlentities(trim($tmp));
+
+
+$file = "http://pm-show-test.site:8888/current-branch-external.php";
+$doc = new DOMDocument();
+$doc->loadHTMLFile($file);
+
+// // $branch = $doc;
+$elements = $doc->getElementsByTagName('p');
+
+echo '<span id="currentBranchOutput" style="display:none">';
+if (!is_null($elements)) {
+  foreach ($elements as $element) {
+    $nodes = $element->childNodes;
+    foreach ($nodes as $node) {
+      echo $node->nodeValue;
+    }
+  }
+}
+echo '</span>';
+
 ?>
 
 <!doctype html>
@@ -38,13 +58,13 @@ echo '<span id="currentBranchOutput" style="display:none">' . $output . '</span>
                 <li class="has-dropdown not-click">
                     <a href="#" id="currentBranchNav"></a>
                     <ul class="dropdown">
-                        <li><a href="execute.php?newBranch=master" class="env-list">Production</a></li>
+                        <li><a href="../execute-external.php?newBranch=master" class="env-list">Production</a></li>
                         <li class="divider"></li>
-                        <li><a href="execute.php?newBranch=DEV" class="env-list">DEV Testing</a></li>
+                        <li><a href="../execute-external.php?newBranch=DEV" class="env-list">DEV Testing</a></li>
                         <li class="divider"></li>
-                        <li><a href="execute.php?newBranch=QA" class="env-list">QA</a></li>
+                        <li><a href="../execute-external.php?newBranch=QA" class="env-list">QA</a></li>
                         <li class="divider"></li>
-                        <li><a href="execute.php?newBranch=UAT" class="env-list">UAT/Staging</a></li>
+                        <li><a href="../execute-external.php?newBranch=UAT" class="env-list">UAT/Staging</a></li>
                     </ul>
                 </li>
                 <li class="divider"></li>
@@ -105,6 +125,12 @@ if(currentBranch == 'master')
 {
     currentBranch = 'Production';
 }
+
+if(currentBranch.search('task') >= 0)
+{
+    currentBranch = 'Individual Task';
+}
+
 // var currentBranch = 'task/001';
 $('#currentBranchNav').text(currentBranch);
 
@@ -115,7 +141,7 @@ function updateBranchButtons ()
     {
         var branchTaskID = currentBranch.substring(5,8);
         console.log(branchTaskID);
-        $('#switch-branch-' + branchTaskID).text('Currently Viewing');
+        $('#switch-branch-' + branchTaskID).text('Currently&nbsp;Viewing');
         $('#switch-branch-' + branchTaskID).addClass('disabled');
     }
 }
@@ -188,7 +214,7 @@ function makeTable (asanaTasks) {
     for (var i = 0; i < numTasks; i++) {
         taskID = arrayTasks[i].name.substring(0, 3);
         rowsHTML += '<tr><td style="width: 10px">';
-        rowsHTML += '<a href="execute.php?newBranch=task/' + taskID + '" class="tiny button in-table" id="switch-branch-' + taskID + '">View&nbsp;Progress</a>';
+        rowsHTML += '<a href="../execute-external.php?newBranch=task/' + taskID + '" class="tiny button in-table" id="switch-branch-' + taskID + '">View&nbsp;Progress</a>';
         rowsHTML += '</td><td>';
         rowsHTML += arrayTasks[i].name;
         var branch = 'task/' + taskID;
